@@ -9,11 +9,12 @@ use stdClass;
 
 abstract class AbstractModel
 {
-    public final function __construct()
+    final public function __construct()
     {
     }
 
-    public static function fromDbRecord(stdClass $dbRecord): static {
+    public static function fromDbRecord(stdClass $dbRecord): static
+    {
         $model = new static();
 
         $fields = static::getModelFields();

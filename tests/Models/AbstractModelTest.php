@@ -43,7 +43,8 @@ class AbstractModelTest extends TestCase
     /**
      * @return class-string
      */
-    protected static function getModelClass(): string {
+    protected static function getModelClass(): string
+    {
         $model = new class () extends AbstractModel {
             #[ModelField]
             public ?int $id = null;
