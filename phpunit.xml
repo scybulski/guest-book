@@ -8,7 +8,9 @@
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="false"
          failOnRisky="true"
-         failOnWarning="true">
+         failOnWarning="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerNotices="true">
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
