@@ -6,11 +6,11 @@ use App\Http\Controllers\CommentController;
 use App\Http\Enums\HttpMethod;
 use App\Http\Routes\AbstractRoute;
 
-final class Index extends AbstractRoute
+final class Store extends AbstractRoute
 {
     public function method(): string
     {
-        return HttpMethod::GET->value;
+        return HttpMethod::POST->value;
     }
 
     public function uri(): string
@@ -22,6 +22,6 @@ final class Index extends AbstractRoute
     {
         $commentController = (new CommentController());
 
-        $commentController->index();
+        $commentController->store();
     }
 }

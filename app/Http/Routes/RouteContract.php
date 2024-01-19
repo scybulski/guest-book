@@ -2,8 +2,6 @@
 
 namespace App\Http\Routes;
 
-use App\Http\Enums\HttpMethod;
-
 interface RouteContract
 {
     public function method(): string;
@@ -11,5 +9,5 @@ interface RouteContract
 
     public function canHandle(string $method, string $uri): bool;
 
-    public function handle();
+    public function handle(): void;
 }

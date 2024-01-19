@@ -21,7 +21,7 @@ class DBConnectionFactory
     public static function getInstance(): self
     {
         return self::$factory
-            ?? new self();
+            ?? self::$factory = new self();
     }
 
     public function getConnection(string $name = 'default'): PDO

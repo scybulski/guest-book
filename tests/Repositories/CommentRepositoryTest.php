@@ -3,6 +3,7 @@
 use App\DB\DBConnectionFactory;
 use App\Dtos\CommentDto;
 use App\Repositories\CommentRepository;
+use App\Values\PaginationValue;
 use PHPUnit\Framework\TestCase;
 
 class CommentRepositoryTest extends TestCase
@@ -62,11 +63,10 @@ class CommentRepositoryTest extends TestCase
 
         $repository = new CommentRepository();
 
-        $paginatedComments = $repository->index(3, 5);
+        $paginatedComments = $repository->index(new PaginationValue(3, 5));
 
-        $this->assertCount(
-            2,
-            $paginatedComments,
-        );
+        $this->assertCount(2, $paginatedComments->comments);
+        $this->assertEquals(3, $paginatedComments->currentPage);
+        $this->assertEquals(3, $paginatedComments->totalPages);
     }
 }

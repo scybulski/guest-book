@@ -24,7 +24,8 @@ final class Router implements RouterContract
 
     public static function getInstance(): self
     {
-        return static::$instance ?? new self();
+        return static::$instance
+            ?? static::$instance = new self();
     }
 
     public function addRoute(RouteContract $route): self
@@ -45,8 +46,6 @@ final class Router implements RouterContract
                     $route->handle();
                 } catch (Exception $e) {
                     $this->renderInternalServerError();
-
-                    return;
                 }
 
                 return;

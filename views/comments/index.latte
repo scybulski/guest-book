@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/assets/style.css">
+    </head>
+    <body background="/assets/notebook.jpg" class="img-bg">
+        <h1>Guest Book</h1>
+
+        <h2>Add your comment</h2>
+        <div class="form">
+            <form action="/comments" method="POST">
+                <div class="form-field-container">
+                    <label for="name">Name:</label>
+                    <input name="name" id="name" required />
+                </div>
+                <div class="form-field-container">
+                    <label for="comment">Comment:</label>
+                    <textarea name="comment" id="comment" required ></textarea>
+                </div>
+                <button type="submit">Add a Comment</button>
+            </form>
+        </div>
+
+        <h2>Previous comment</h2>
+        <div class="comments-list">
+            <ul n:if="$comments">
+                {foreach $comments as $comment}
+                    <li>{$comment->comment} <strong>~{$comment->name}</strong></li>
+                {/foreach}
+            </ul>
+        </div>
+
+        <div class="paginator">
+            <p>
+                {for $i = 1; $i <= $totalPages; $i++}
+                    <span class="paginator-item {if $i === $currentPage} paginator-item-selected {/if}">
+                        {if $i !== $currentPage}
+                            <a href="/comments?page={$i}&pageSize={$pageSize}">{$i}</a>
+                        {else}
+                            <strong>{$i}</strong>
+                        {/if}
+                    </span>
+                {/for}
+            </p>
+            <p>
+                <strong>Per page: </strong>
+                {foreach [5, 10, 25, 100, 200] as $perPage}
+                    <a href="/comments?page={$currentPage}&pageSize={$perPage}">{$perPage}</a>
+                {/foreach}
+            </p>
+        </div>
+    </body>
+</html>
