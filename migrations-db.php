@@ -1,5 +1,13 @@
 <?php
 
-use App\DB\DBConnectionFactory;
+$dbConfig = require 'config/db.php';
 
-return DBConnectionFactory::getInstance()->getConnection();
+$defaultDbConfig = $dbConfig['default'] ?? [];
+
+return [
+    'dbname' => $defaultDbConfig['dbname'],
+    'user' => $defaultDbConfig['user'],
+    'password' => $defaultDbConfig['password'],
+    'host' => $defaultDbConfig['host'],
+    'driver' => 'pdo_mysql',
+];

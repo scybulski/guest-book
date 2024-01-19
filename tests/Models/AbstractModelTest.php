@@ -14,16 +14,17 @@ class AbstractModelTest extends TestCase
      */
     public function createsModelFromDbRecord(): void
     {
-        $dbRecord = new stdClass();
-        $dbRecord->id = 101;
-        $dbRecord->value = 'Hello World!';
+        $dbRecord = [
+            'id' => 101,
+            'value' => 'Hello World!',
+        ];
 
         $modelClass = static::getModelClass();
 
         $model = $modelClass::fromDbRecord($dbRecord);
 
-        $this->assertEquals($dbRecord->id, $model->id);
-        $this->assertEquals($dbRecord->value, $model->value);
+        $this->assertEquals($dbRecord['id'], $model->id);
+        $this->assertEquals($dbRecord['value'], $model->value);
     }
 
     /**
@@ -41,12 +42,22 @@ class AbstractModelTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function returnsPrimaryKeyField(): void
+    {
+        $modelClass = static::getModelClass();
+
+        $this->assertEquals('id', $modelClass::getPrimaryKey());
+    }
+
+    /**
      * @return class-string
      */
     protected static function getModelClass(): string
     {
         $model = new class () extends AbstractModel {
-            #[ModelField]
+            #[ModelField(isPrimary: true)]
             public ?int $id = null;
             #[ModelField]
             public ?string $value = null;
